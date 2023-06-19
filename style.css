@@ -205,12 +205,15 @@ input:focus {
     caret-color: transparent;
 }
 .doScale {
-    animation: ScaleA 1s ease-in-out;
+    animation: ScaleA 0.5s ease-in-out;
 }
 @keyframes ScaleA {
     0% { transform: scale(100%);}
-    50% {
-        transform: scale(110%);
+    40% {
+        transform: scale(115%);
+    }
+    70% {
+        transform: scale(90%);
     }
     100% {
         transform: scale(100%);
@@ -270,7 +273,7 @@ input:focus {
     }
     100% {
         transform: rotateY(0deg);
-        background-color: #F2B93D;
+        background-color: rgb(242, 185, 61);
     }
 }
 .gray {
@@ -405,4 +408,7 @@ input:focus {
 #loop {
     color: white;
     text-decoration: none;
+}
+#loop:hover{
+    color:black;
 }

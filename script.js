@@ -5763,8 +5763,15 @@ function selectWordOfTheDay() {
     return Word;
 }
 const word = selectWordOfTheDay();
-const millisecondsInADay = 24 * 60 * 60 * 1000;
-setInterval(selectWordOfTheDay(), millisecondsInADay);
+document.addEventListener('keyup',function (e){
+    let cur = e.target;
+    if (cur.value.length === 1){
+        cur.classList.add('doScale');
+        setTimeout(function() {
+            cur.classList.remove('doScale');
+        },500);
+    }
+});
 closeButton.addEventListener('click', function() {
     const closeTarget = document.getElementById('tutclose');
     const contact = document.getElementById('contacts');
@@ -5787,6 +5794,7 @@ function SmothMove(event,firstId,nextRow,nextclass){
     if (input.value.length === 1) {
         if (event.key === 'Backspace'){
             input.value = '';
+            cur.style.border = 'none';
         } else if (event.key !== 'Enter') {
             let nex = input.nextElementSibling;
             if (nex !== null){
@@ -5822,6 +5830,7 @@ function Letter(e) {
     let cur = e.target;
     if (keyValue.length === 1){
         cur.value = keyValue;
+        cur.style.border = 'white solid 0.1px';
     }
 }
 function addLetter(e){
@@ -5829,9 +5838,9 @@ function addLetter(e){
     let cur = e.target;
     let next = cur.nextElementSibling;
     if(next !== null && keyValue.length === 1) {
+        next.style.border = 'white solid 0.1px';
         next.focus();
         next.value = keyValue;
-    } else {
     }
 }
 
@@ -5839,6 +5848,8 @@ function removeLetter(e) {
     let cur = e.target;
     let pre = cur.previousElementSibling;
     if (pre !== null) {
+        cur.style.border = 'none';
+        pre.style.border = 'none';
         pre.value = '';
         pre.focus();
     }
@@ -5872,38 +5883,57 @@ function Check(firstId,nextRow,nextclass){
     let count = 0;
     const curWord = ToWord(firstId).toLowerCase();
     console.log(curWord);
-    for (let i = 0; i < 5;i++){
-        if (!isInTheWord(curWord.charAt(i),word)) {
-            Time(cur,'gray',i,'#606060',curWord.charAt(i));
-        } else {
-        if (curWord.charAt(i) === word.charAt(i)){
-            Time(cur,'green',i,'#538D4E',curWord.charAt(i));
-            count++;
-        } else {
-            for (let k = 0; k < 5;k++){
-                if (curWord.charAt(i) === word.charAt(k) && k !== i){
-                    Time(cur,'yellow',i,'#F2B93D',curWord.charAt(i));
+    if (!isRealWord(curWord)){
+        ShowError('not a real word',firstId);
+    } else {
+        for (let i = 0; i < 5;i++){
+            if (!isInTheWord(curWord.charAt(i),word)) {
+                Time(cur,'gray',i,'#606060',curWord.charAt(i));
+            } else {
+            if (curWord.charAt(i) === word.charAt(i)){
+                Time(cur,'green',i,'#538D4E',curWord.charAt(i));
+                count++;
+            } else {
+                for (let k = 0; k < 5;k++){
+                    if (curWord.charAt(i) === word.charAt(k) && k !== i){
+                        Time(cur,'yellow',i,'#F2B93D',curWord.charAt(i));
+                    } 
                 }
             }
+            }
+            cur = cur.nextElementSibling;
         }
+        if (count === 5){
+            setTimeout(function(){
+                ShowError('You Win!',firstId);
+            },5000);
+        } else {
+            let cor = document.getElementById(firstId);
+            for (let k = 0; k < 5;k++){
+                cor.disabled = true;
+                cor = cor.nextElementSibling;
+            }
+            if (firstId === 'FI6'){
+                setTimeout(function() {
+                    ShowError('the word was : ' + word,firstId);
+                },5000);
+            } else {
+                const nextDiv = document.getElementById(nextclass);
+                const next = nextDiv.querySelector('#' + nextRow);
+                next.disabled = false;
+                next.focus();
+            }
         }
-        cur = cur.nextElementSibling;
     }
-    if (count === 5){
-        setTimeout(function(){
-            ShowError('You Win!',firstId);
-        },5000);
-    } else {
-        const nextDiv = document.getElementById(nextclass);
-        const next = nextDiv.querySelector('#' + nextRow);
-        let cor = document.getElementById(firstId);
-        for (let k = 0; k < 5;k++){
-            cor.disabled = true;
-            cor = cor.nextElementSibling;
+}
+
+function isRealWord(curWord){
+    for (let i = 0; i < WORDS.length;i++){
+        if (curWord === WORDS[i]){
+            return true;
         }
-        next.disabled = false;
-        next.focus();
     }
+    return false;
 }
 
 function isInTheWord(char,word){
@@ -5938,7 +5968,17 @@ function changeButtonColor(value, color) {
     for (var i = 0; i < buttons.length; i++) {
       let button = buttons[i];
       if (button.textContent === value) {
-        button.style.backgroundColor = color;
+        let c = getComputedStyle(button);
+        let Bcolor = c.backgroundColor;
+        console.log(Bcolor);
+        if (color === '#606060' && Bcolor !== 'rgb(242, 185, 61)' && Bcolor !== 'rgb(83, 141, 78)'){
+            button.style.backgroundColor = '#606060';
+        }
+        else if (color === '#F2B93D' && Bcolor !== 'rgb(83, 141, 78)'){
+            button.style.backgroundColor = '#F2B93D';
+        } else {
+            button.style.backgroundColor = '#538D4E';
+        }
       }
     }
   }
