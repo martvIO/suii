@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign up</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mainStyle.css') }}">
+</head>
+<body>
+    <form action="SignUp">
+        <button class="button-6" placeholder="sign up" {% if disable_button %}disabled{% endif %}>sign up</button>
+    </form>
+    
+    <form action="login" method="post" >
+        <button class="button-6" placeholder="login" {% if disable_button %}disabled{% endif %}>login</button>
+    </form>
+
+    <form action="signOut" method="post" > 
+        <button class="button-6" aria-placeholder="signOut" {% if not disable_button  %}disabled{% endif %}>sign out</button>
+    </form>
+
+    <form action="home" method="post" > 
+        <button class="button-6" aria-placeholder="home" {% if not disable_button  %}disabled{% endif %}>home</button>
+    </form>
+</body>
+</html>

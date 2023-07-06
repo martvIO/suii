@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mainStyle.css') }}">
+</head>
+<body>
+    <form action="home" action="signUp" method="post" id="sign_Up">
+        <label>Username : </label><input class="button-6" name="username" type="text"><br> 
+        <label>First Name : </label><input class="button-6" name="Fname" type="text"><br>
+        <label>Last Name : </label><input class="button-6" name="Lname" type="text"><br>
+        <label>Age : </label><input class="button-6" name="age" type="number"><br>
+        <label>Birth Date : </label><input class="button-6" name="B_Date" type="date"><br>
+        <label>country : </label><input class="button-6" name="country" type="text"><br>
+        <label>city : </label><input class="button-6" name="city" type="text"><br>
+        <label>email : </label><input class="button-6" name="emailO" type="text"><br>
+        <label>password : </label><input class="button-6" name="password" type="text"><br>
+        <p class="error-message">{{ error_message }}</p>
+        <input class="button-6" placeholder="create" name="createAcount" type="submit" value="createAcount" id="submit">
+    </form>
+</body>
+<script src="{{ url_for('static', filename='js/mainScript.js') }}"></script>
+</html>

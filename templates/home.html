@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h2>your balance (acount balance) : {{ balanced }}$</h2><br>
+    <h3>visa balance (visa balance) : {{ balanced_V }}$</h3>
+    <div class="container">
+        <div id="one">
+            <form id="addVisaForm" action="/AddVisa" method="POST">
+                <h1>Add VisaCard</h1>
+                <input type="text" class="button-6" name="visa" placeholder="Visa Card">
+                <label>Start Date :</label>
+                <input type="date" class="button-6" name="sDate" placeholder="Start Date">
+                <label>End Date :</label>
+                <input type="date" class="button-6" name="eDate" placeholder="End Date">
+                <p class="error-message">{{ error_message_V }}</p>
+                <input type="submit" class="button-6">
+            </form>            
+        </div>
+        <div id="two">
+            <form id="moneyForm" action="/Transaction" method="POST">
+                <h1>Make a Transaction</h1>
+                <input type="text" class="button-6" name="In_money" placeholder="In Money">
+                <input type="text" class="button-6" name="out_money" placeholder="Out Money">
+                <p class="error-message">{{ error_message_T }}</p>
+                <input type="submit" class="button-6" value="Send">
+            </form>
+        </div>
+        <div id="there">
+            <form id="SendMoney" action="/SendMoney" method="POST">
+                <h1>Send Money</h1>            
+                <input type="text" class="button-6" name="amount" id="am" placeholder="Amount">
+                <input type="text" class="button-6" name="remail" id="ts" placeholder="Recipient's email">
+                <p class="error-message">{{ error_message_S }}</p>
+                <input type="submit" class="button-6" value="Send">            
+            </form>
+        </div>
+    </div>
+    <script>
+    </script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mainStyle.css') }}">
+</head>
+<body>
+    <form action="home" method="post" id="login">
+        <label>Username : </label><input class="button-6" name="Username" type="text"><br> 
+        <label>email : </label><input class="button-6" name="Email" type="text"><br>
+        <label>password : </label><input class="button-6" name="Password" type="text"><br>
+        <p class="error-message">{{ error_message }}</p>
+        <button class="button-6" id="submit">log in</button>
+    </form>
+</body>
+<script src="{{ url_for('static', filename='js/scriptO.js') }}"></script>
+</html>

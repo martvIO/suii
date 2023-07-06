@@ -1,0 +1,40 @@
+body 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+}
+#sign_Up 
+{
+  margin: 10px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  
+}
+label {
+  color: white;
+}
+.error-message {
+  display: none;
+  color: red;
+}
+button {
+  width: 200px;
+  height: 150px;
+}
+form {
+  background-color: transparent;
+}
+.button-6 {
+  font-size: x-large;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  border: 50px;
+}
