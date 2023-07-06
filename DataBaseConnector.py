@@ -205,7 +205,8 @@ class DataBase:
                 x = x.replace("'","")
                 x = x.replace(",","")
                 rows[i] = x
-            return rows  
+            return rows
+            #it return a list  
         except mysql.connector.Error as e:
             print("An error Happened : ",e)
         finally:     
